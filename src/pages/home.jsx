@@ -86,6 +86,7 @@ const Home = () => {
         inputBg={inputBg}
         placeholder={placeholder}
         text={text}
+        fill={icon}
         directionIcon={directionIcon}
         border={border}
         showAddBtn={showAddBtn}

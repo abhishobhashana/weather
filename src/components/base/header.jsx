@@ -47,7 +47,7 @@ export default function Header({
         </span>
       </div>
 
-      <div className="flex gap-2.5">
+      <div className="hidden xl:flex gap-2.5">
         {showAddBtn ? (
           <button
             className={`flex items-center gap-2 px-4 py-1.5 rounded-lg shadow-md bg-default/5 backdrop-brightness-90 backdrop-blur-md text-base`}
@@ -61,7 +61,7 @@ export default function Header({
             }}
           >
             <Plus fill={fill} />
-            <span className={textColor}>{addBtnText}</span>
+            <span className="text-white">{addBtnText}</span>
           </button>
         ) : null}
 

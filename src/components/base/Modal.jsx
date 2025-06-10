@@ -94,11 +94,10 @@ const Modal = ({ weatherData = {} }) => {
           desc: data.feels_like_desc,
           icon: <Conditions width="20" />,
           insight: {
-            title: Math.round(weatherData?.temperature),
+            title: `${Math.round(weatherData?.temperature)}°`,
             subTitle: `H:${Math.round(
               weatherData?.temperatureMax
-            )} L:${Math.round(weatherData?.temperatureMin)}`,
-            icon: <Conditions />,
+            )}° L:${Math.round(weatherData?.temperatureMin)}°`,
           },
         };
       case 1:
@@ -179,10 +178,10 @@ const Modal = ({ weatherData = {} }) => {
           desc: data.avg_temp_desc,
           icon: <Chart fill="#FFF" />,
           insight: {
-            title: Math.round(weatherData?.temperatureAvg),
+            title: `${Math.round(weatherData?.temperatureAvg)}°`,
             subTitle: `Average high: ${Math.round(
               weatherData?.temperatureMax
-            )}`,
+            )}°`,
           },
         };
       case 9:

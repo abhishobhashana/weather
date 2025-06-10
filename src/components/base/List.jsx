@@ -1,4 +1,3 @@
-import moment from "moment";
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector } from "react-redux";
@@ -123,12 +122,9 @@ export const ListItem = ({
           }}
         >
           <div className="w-full flex justify-between">
-            <div className="flex flex-col gap-1">
-              <span className="text-lg font-semibold leading-none">
-                {item.name}
-              </span>
-              <span>{moment(item.time).utc().format("LT")}</span>
-            </div>
+            <span className="text-lg font-semibold leading-none">
+              {item.name}
+            </span>
             <span className="text-4xl">{item.temp}°</span>
           </div>
 

@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CircularGauge,
   Footer,
@@ -21,17 +21,24 @@ import {
   Eye,
   Gauge,
   Humidity,
+  Plus,
   Sun,
   Sunset,
   Thermometer,
 } from "../assets/icons";
-import { setModalOpen, setModalValue } from "../store/main";
+import {
+  setAddBtn,
+  setModalOpen,
+  setModalValue,
+  setSideMenuOpen,
+  setWeatherListByLocations,
+} from "../store/main";
 import { useSelectedItembyClick } from "../utils/useSelectedItemByClick";
 import { useWidgetContainerHeight } from "../utils/useWidgetContainerHeight";
 import { useBackground, useResolution } from "../utils/useResolution";
 import moment from "moment-timezone";
 import data from "../data/data.json";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchWeatherFailure } from "../store/weather";
 
 export default function WeatherContainer({
@@ -54,6 +61,9 @@ export default function WeatherContainer({
   location = "",
   timezone = "",
 }) {
+  const addLocationData = useSelector(
+    (state) => state?.weather?.addLocationData
+  );
   const dispatch = useDispatch();
 
   const screenWidth = useResolution();
@@ -69,7 +79,10 @@ export default function WeatherContainer({
 
   useEffect(() => {
     dispatch(fetchWeatherFailure());
+    dispatch(setAddBtn(false));
   }, []);
+
+  const [addBtnText, setAddBtnText] = useState("Add");
 
   return (
     <>
@@ -108,6 +121,34 @@ export default function WeatherContainer({
           </div>
         ) : weather && Object.keys(weather).length > 0 ? (
           <>
+            {showAddBtn ? (
+              <div className="z-20 w-full flex items-center justify-between px-4 py-2">
+                <span
+                  className="pl-2 text-white"
+                  onClick={() => {
+                    dispatch(setSideMenuOpen(true));
+                    dispatch(setAddBtn(false));
+                  }}
+                >
+                  {data?.cancel}
+                </span>
+
+                <span
+                  className="text-white"
+                  onClick={() => {
+                    dispatch(setWeatherListByLocations(addLocationData));
+                    setAddBtnText("Added");
+                    setTimeout(() => {
+                      dispatch(setAddBtn(false));
+                      setAddBtnText("Add");
+                    }, 400);
+                  }}
+                >
+                  {addBtnText}
+                </span>
+              </div>
+            ) : null}
+
             <div
               className={`z-10 w-full flex flex-col gap-5 xl:p-24 md:p-12 sm:p-6 sm:pt-10 sm:pb-0 pb-0 items-center justify-center ${
                 isMenuOpen ? "sm:hidden xl:flex md:flex" : ""
@@ -413,6 +454,7 @@ export default function WeatherContainer({
                 </div>
               </div>
             </div>
+
             <Modal weatherData={weatherData} />
           </>
         ) : (

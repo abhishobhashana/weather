@@ -14,7 +14,7 @@ function SearchList({
   );
   const hasInput = value.length > 0;
 
-  const containerClasses = `${className} bg-light-bg/90 dark:bg-dark-bg/90 backdrop-blur-md xl:min-w-max md:min-w-full w-full text-white shadow-lg xl:rounded-xl p-1 border border-seperator dark:border-dark-seperator`;
+  const containerClasses = `${className} xl:bg-light-bg/90 xl:dark:bg-dark-bg/90 backdrop-blur-md xl:min-w-max md:min-w-full w-full text-white xl:shadow-lg xl:rounded-xl p-1 xl:border border-seperator dark:border-dark-seperator`;
 
   if (!hasInput) return null;
 

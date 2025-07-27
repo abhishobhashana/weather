@@ -218,9 +218,11 @@ const getWeatherCategory = (
 
   if (code === 1000) return isNight ? "Night" : "Sunny";
 
+  if (code === 1001) return isNight ? "NightCloudy" : "Cloudy";
+
   const heavyRainCodes = [
-    4201, 4202, 4203, 4204, 4205, 4208, 4209, 4210, 4211, 4212, 4213, 4214,
-    4215,
+    4000, 4200, 4201, 4202, 4203, 4204, 4205, 4208, 4209, 4210, 4211, 4212,
+    4213, 4214, 4215,
   ];
   if (heavyRainCodes.includes(code)) return "HeavyRain";
 

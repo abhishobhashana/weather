@@ -19,6 +19,7 @@ export default function Header({
   placeholder = "",
   inputBg = "",
   showAddBtn = false,
+  condition = "",
 }) {
   const addLocationData = useSelector(
     (state) => state?.weather?.addLocationData
@@ -50,7 +51,11 @@ export default function Header({
       <div className="hidden xl:flex gap-2.5">
         {showAddBtn ? (
           <button
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-lg shadow-md bg-default/5 backdrop-brightness-90 backdrop-blur-md text-base`}
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-lg shadow-md bg-default/5 ${
+              condition === "NightCloudy" || condition === "HeavyRain"
+                ? "backdrop-brightness-50"
+                : "backdrop-brightness-90"
+            } backdrop-blur-md text-base`}
             onClick={() => {
               dispatch(setWeatherListByLocations(addLocationData));
               setAddBtnText("Added");
@@ -71,6 +76,7 @@ export default function Header({
           placeholder={placeholder}
           fill={fill}
           crossFill={crossFill}
+          condition={condition}
         />
       </div>
     </div>

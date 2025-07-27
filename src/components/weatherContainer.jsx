@@ -104,6 +104,7 @@ export default function WeatherContainer({
           inputBg={inputBg}
           placeholder={placeholder}
           showAddBtn={showAddBtn}
+          condition={weatherData?.condition}
         />
 
         {searchValue?.length > 0 && isSearchPanelOpen && isTabScreen ? (
@@ -122,7 +123,7 @@ export default function WeatherContainer({
         ) : weather && Object.keys(weather).length > 0 ? (
           <>
             {showAddBtn ? (
-              <div className="z-20 w-full flex items-center justify-between px-4 py-2">
+              <div className="z-20 w-full lg:hidden md:flex sm:flex items-center justify-between px-4 py-2">
                 <span
                   className="pl-2 text-white"
                   onClick={() => {

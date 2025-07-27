@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CloseCircle, Search } from "../../assets/icons";
 import { SearchList, Loader } from ".";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setAddBtn,
   setSearchPanelOpen,
@@ -9,6 +9,7 @@ import {
   setSearchValueState,
 } from "../../store/main";
 import { useSelectedItembyClick } from "../../utils/useSelectedItemByClick";
+import { parseWeatherData } from "../../utils/useWeather";
 
 export const searchInput = ({
   className = "",
@@ -21,6 +22,9 @@ export const searchInput = ({
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
+
+  const weather = useSelector((state) => state?.weather?.data);
+  const weatherData = parseWeatherData(weather);
 
   const inputRef = useRef();
   const dispatch = useDispatch();
@@ -124,7 +128,12 @@ export const searchInput = ({
           placeholder="Search"
           autoComplete="off"
           aria-label="Search"
-          className={`w-full flex items-center bg-default/5 backdrop-brightness-90 backdrop-blur-md ${placeholder} text-white text-base p-1.5 pl-8 rounded-lg focus:outline-none focus:ring focus:ring-blue`}
+          className={`w-full flex items-center ${
+            weatherData?.condition === "NightCloudy" ||
+            weatherData?.condition === "HeavyRain"
+              ? "backdrop-brightness-50"
+              : "backdrop-brightness-90"
+          } bg-default/5 backdrop-blur-md ${placeholder} text-white text-base p-1.5 pl-8 rounded-lg focus:outline-none focus:ring focus:ring-blue`}
           spellCheck="false"
           value={searchValue}
           onClick={() => {

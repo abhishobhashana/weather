@@ -26,7 +26,7 @@ const Maps = ({ location, temp, bgColor }) => {
     };
     mapRef?.current?.flyTo(pos, 7);
     setCenter(pos);
-  }, [location]);
+  }, [location, mapRef?.current]);
 
   const locationMarkerIcon = () =>
     L.divIcon({
